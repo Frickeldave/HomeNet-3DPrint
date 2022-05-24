@@ -10,15 +10,16 @@ union() {
 
     rotate([90,0,0])
     translate([3.5, 3, -2.5])
-    hexgrid([185, 34, 2.5], 13, 2.5);
+    color("white")
+    hexgrid([180, 34, 2.5], 13, 2.5);
     
     difference() {
         
-        cube([200,4.5, 50]);
+        cube([196,4.5, 50]);
         
         color("red")
         translate([4.5, -1, 9.5])
-        cube([200 - 10, 6.5, 50-15]);
+        cube([186, 6.5, 50-15]);
     }
     
 }
