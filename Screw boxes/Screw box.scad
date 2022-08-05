@@ -3,7 +3,7 @@ $fn=400;
 
 box_sidewall_thickness=1.5;
 box_ground_thickness=1.5;
-box_outer_size_width=50;
+box_outer_size_width=100;
 box_outer_size_depth=100;
 box_outer_height=55;
 box_label_width=37;
