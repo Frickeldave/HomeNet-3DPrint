@@ -1,4 +1,4 @@
-$fn=50;
+$fn=200;
 
 module gardena_connector_small() {
     
