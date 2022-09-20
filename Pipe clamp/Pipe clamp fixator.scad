@@ -1,0 +1,33 @@
+$fn=400;
+
+// The depth of the complete fitting (In this drawing Y-Axis).
+pcf_depth=60;
+
+// The thickness of the upright supports where you place the water meter on.
+pcf_thickness=13;
+
+// The diameter of the pipe.
+pcf_pipe_diameter=32;
+
+// The diameter of the whole of the screws you want to use.
+pcf_screwhole_diameter=6.5;
+
+difference() {
+    // the base body
+    color("grey")
+    //translate([pos_x, pos_y, pos_z])
+    cube([pcf_thickness, pcf_depth, pcf_pipe_diameter/2+7]);
+
+    // Support surface for the water meter
+    translate([-1, pcf_depth/2, -1])
+    rotate([0,90,0])
+    cylinder(r = pcf_pipe_diameter/2, h = pcf_pipe_diameter+2);
+    
+    color("red")
+    translate([pcf_thickness / 2, 7, -1])
+    cylinder(pcf_pipe_diameter/2+9, pcf_screwhole_diameter/2, pcf_screwhole_diameter/2);
+
+    color("red")
+    translate([pcf_thickness / 2, pcf_depth - 7, -1])
+    cylinder(pcf_pipe_diameter/2+9, pcf_screwhole_diameter/2, pcf_screwhole_diameter/2);            
+}
