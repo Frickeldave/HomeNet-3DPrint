@@ -3,10 +3,12 @@ $fn=400;
 sh_holder_thickness = 4.5;
 sh_holder_height = 43;
 
-use <./IKEA Skadis holder.scad>
+use <./IKEA Skadis include holder.scad>
 
 module ikea_skadis_backwall(width, height) {
     union() {
+
+        width = width > 43  ? width : 44;
 
         // backwall
         cube([width,2,height]);
@@ -31,4 +33,4 @@ module ikea_skadis_backwall(width, height) {
     }
 }
 
-//ikea_skadis_backwall(70,90);
+ikea_skadis_backwall(24,43);

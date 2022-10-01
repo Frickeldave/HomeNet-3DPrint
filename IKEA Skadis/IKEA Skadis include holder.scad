@@ -10,6 +10,7 @@ sh_short_tail=2;
 module ikea_skadis_holder() {
     difference() {
         union() {
+            
             //Vertical wall
             color("green")
             cube([sh_width,sh_material_size,sh_height]);

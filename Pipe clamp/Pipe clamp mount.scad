@@ -36,28 +36,21 @@ difference() {
     // left screw
     color("red")
     translate([pcf_thickness / 2, 7, -1])
-    cylinder(pcf_pipe_diameter/2+9, pcf_screwhole_diameter/2, pcf_screwhole_diameter/2);
-
-    // left screw sink
-    color("pink")
-    translate([pcf_thickness / 2, 7, pcf_body_height - pcf_screw_head_hight])
-    cylinder(h=pcf_screw_head_hight + 1, r1=pcf_screwhole_diameter / 2, r2=pcf_screw_head_diameter / 2 + 1);
+    cylinder(pcf_pipe_diameter/2+9, pcf_screwhole_diameter/2-0.5, pcf_screwhole_diameter/2-0.5);
 
     // right screw
     color("red")
     translate([pcf_thickness / 2, pcf_depth - 7, -1])
-    cylinder(pcf_pipe_diameter/2+9, pcf_screwhole_diameter/2, pcf_screwhole_diameter/2);
+    cylinder(pcf_pipe_diameter/2+9, pcf_screwhole_diameter/2-0.5, pcf_screwhole_diameter/2-0.5);
 
-    // right screw sink
+    // middle screw
+    color("red")
+    translate([pcf_thickness / 2, pcf_depth / 2, pcf_body_height -9])
+    cylinder(10, pcf_screwhole_diameter/2, pcf_screwhole_diameter/2);
+
+    // middle screw sink
     color("pink")
-    translate([pcf_thickness / 2, pcf_depth - 7, pcf_body_height - pcf_screw_head_hight])
-    cylinder(h=pcf_screw_head_hight + 1, r1=pcf_screwhole_diameter / 2, r2=pcf_screw_head_diameter / 2 + 1);
+    translate([pcf_thickness / 2, pcf_depth / 2, pcf_body_height - 10])
+    cylinder(h=pcf_screw_head_hight + 1, r1=pcf_screw_head_diameter / 2 + 1, r2=pcf_screwhole_diameter / 2);
 
 }
-
-
-
-
-
-
-    

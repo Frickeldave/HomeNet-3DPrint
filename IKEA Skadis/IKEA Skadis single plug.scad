@@ -7,7 +7,7 @@ sh_sp_thickness = 2;
 sh_holder_thickness = 4.5;
 sh_holder_height = 43;
 
-use <./IKEA Skadis holder.scad>
+use <./IKEA Skadis include holder.scad>
 
 union() {
 
