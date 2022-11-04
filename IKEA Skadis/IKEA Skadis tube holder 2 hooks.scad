@@ -1,7 +1,7 @@
 $fn=400;
 
-tube_distance = 45;
-tube_width = 14;
+tube_distance = 10;
+tube_width = 24;
 tube_height = 10;
 tube_material_size = 2;
 tube_reinforcements = 1;

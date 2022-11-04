@@ -1,7 +1,7 @@
 //https://openscad-meistern.de/buch/
 
 //https://github.com/brodykenrick/text_on_OpenSCAD/
-use <text_on/text_on.scad>
+use <./../modules/text_on.scad>
 
 $fn=400;
 gate_base_plate_height=5;
@@ -57,6 +57,6 @@ difference() {
 rotate([90,0,0])
 translate([gate_wide/2,-11,-gate_base_plate_size/2+2.5])
 color("blue")
-text_on_circle(t="Le passe trappe",r=43,font="ScriptMTBold",size=9,spacing=0.9, rotate=1);
+text_on_circle(t="Le passe trappe",r=43,font="ScriptMTBold",size=7.5,spacing=0.9, rotate=1);
 
 

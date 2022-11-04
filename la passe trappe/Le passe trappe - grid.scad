@@ -1,10 +1,14 @@
-use <hex_grid/hex_grid.scad>;
+//https://www.thingiverse.com/thing:1296149/files
+use <./../modules/hex_grid_v02.scad>;
 
 $fn=100;
 gate_thickness=4.5;
 grid_thickness=2.5;
 gate_width=200;
 gate_height=50;
+
+
+
 
 union() {
 

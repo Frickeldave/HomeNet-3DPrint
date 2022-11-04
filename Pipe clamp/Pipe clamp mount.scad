@@ -7,16 +7,16 @@ pcf_depth=50;
 pcf_thickness=13;
 
 // The diameter of the pipe.
-pcf_pipe_diameter=28;
+pcf_pipe_diameter=29;
 
 // The diameter of the whole of the screws you want to use.
-pcf_screwhole_diameter=4;
+pcf_screwhole_diameter=5;
 
 // The diameter scre head.
 pcf_screw_head_diameter=8.5;
 
 // The diameter scre head.
-pcf_screw_head_hight=4;
+pcf_screw_head_hight=5;
 
 
 pcf_body_height=pcf_pipe_diameter / 2 + 7;

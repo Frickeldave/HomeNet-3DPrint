@@ -1,6 +1,10 @@
 $fn=400;
 
-module blast_gate_body() {
+// module blast_gate_body_outer() {
+//     blast_gate_body(27.5)
+// }
+
+module blast_gate_body(outer_rad, plug_high) {
         
     difference() {
         
@@ -11,12 +15,12 @@ module blast_gate_body() {
             // Connection plug
             color("green")
             translate([0,0,5])
-            cylinder(h=35,r=27);
+            cylinder(h=plug_high,r=outer_rad);
         }
 
         // Connection plug
         translate([0,0,0])
-        cylinder(h=41,r=25);
+        cylinder(h=plug_high + 6,r=outer_rad-2);
 
         // Slider excerpt
         color("red")
