@@ -70,11 +70,17 @@ difference() {
                 ml_h_thickness);
 
 
-        translate([0,0,ml_up_heigth + ml_up_thickness])
+        translate([0, 0, ml_up_heigth + ml_up_thickness])
         lamp_box(ml_h_width,
                 ml_up_depth + ml_h_monitor_thickness + ml_h_monitor_distance,
                 ml_h_height,
                 ml_h_thickness);
+
+        translate([0, ml_up_depth + ml_h_monitor_distance, ml_h_height -3])
+        cube([ml_h_width, ml_h_thickness, 5]);
+
+        translate([0, ml_up_depth + ml_h_monitor_distance + ml_h_monitor_thickness - ml_h_thickness, 0])
+        cube([ml_h_width, ml_h_thickness, ml_h_height + ml_h_thickness + 1]);
     }
 
     // The hole between clip and case
@@ -94,7 +100,7 @@ difference() {
 
     //The hole for the power connector
     color("red")
-    translate([ml_h_width / 2 - 4.5, ml_up_depth + ml_h_monitor_thickness + ml_h_monitor_distance - 2, ml_up_heigth + ml_h_thickness + 6])
+    translate([ml_h_width / 2 - 4.5, ml_up_depth + ml_h_monitor_distance + ml_h_monitor_thickness - 2, ml_up_heigth + ml_h_thickness + 6])
     cube([9, 3, 11]);
 }
-
+        
