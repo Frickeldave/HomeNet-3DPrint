@@ -47,8 +47,8 @@ module raspi3_case(w, d, e, h, t) {
 
         // The hole for the usb power connector
         color("red")
-        translate([pi3_case_point0x + e / 2 + 5, pi3_case_point0y - 1, t + 2])
-        cube([15, t + 2, 9]);
+        translate([pi3_case_point0x + e / 2 + 5, pi3_case_point0y - 1, t + 4])
+        cube([15, t + 2, 7]);
 
     }
 
@@ -114,8 +114,8 @@ module funnel() {
 
         // Cutout the tunnel for the usb power
         color("green")
-        translate([-39.5, -100, -27])
-        cube([14, 100, 9]);
+        translate([-39.5, -100, -25])
+        cube([12, 100, 7]);
 
     }
 
