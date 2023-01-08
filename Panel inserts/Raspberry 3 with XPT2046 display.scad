@@ -134,5 +134,5 @@ difference() {
 }
 
 // Add the raspberry pi case
-translate([0, 0, -31])
+translate([0, 0, -32])
 raspi3_case(6, 31, 2);
