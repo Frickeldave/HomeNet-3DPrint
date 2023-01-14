@@ -48,19 +48,19 @@ module hmip_cover(w, d, e, t) {
 
         color("red")
         //translate([0, 0, - t])
-        cube([w, d, t + 2], center=true);
+        cube([w - 2, d - 1, t + 2], center=true);
     }
 
     difference() {
         // The inner frame
         color("pink")
-        translate([0, 0, - t])
-        cube([hmip_case_width - 0.1, hmip_case_depth - 0.1, 2], center=true);
+        translate([0, 0, - t - 2])
+        cube([hmip_case_width - 0.2, hmip_case_depth - 0.2, 10], center=true);
 
         // The inner frame outcut
         color("red")
-        translate([0, 0, - t])
-        cube([hmip_case_width - 1.5, hmip_case_depth - 1.5, 3], center=true);
+        translate([0, 0, - t - 2])
+        cube([hmip_case_width - 1.5, hmip_case_depth - 1.5, 11], center=true);
     }
 };
 
@@ -79,7 +79,7 @@ module funnel() {
 
     // Add the hmip case
     translate([0, 0, -22])
-    %hmip_case(pi_hmip_width, pi_hmip_depth, 3, 20, 2);
+    hmip_case(pi_hmip_width, pi_hmip_depth, 3, 20, 2);
 };
 
 module cover() {

@@ -10,95 +10,6 @@ pi_funnel_bottom_diameter = 100;
 pi_pi3_width=85;
 pi_pi3_depth=56;
 
-pi_draw="funnel"; // "funnel" or "cover"
-
-module screw_mount() {
-    difference() {
-        cylinder(h=4, r=1.5);
-        cylinder(h=5, r=0.5);
-    }
-};
-
-// e = enlargement. When e=0 the case will have the exact size if the raspberry pi. 
-// h = The high of the case. Please consider, that the screw-mounts has the high of 4 mm and you hava th add the material thickness of the bottom.
-//     When you need the high of 25mm for your raspberry you have to use: 25 + t + 4.
-module raspi3_case(w, d, e, h, t) {
-     
-    pi3_case_width=w + e;
-    pi3_case_depth=d + e;
-
-    pi3_case_point0x = - pi3_case_width / 2 - t;
-    pi3_case_point0y = - pi3_case_depth / 2 - t;
-
-    difference() {
-        
-        // The outside measure of the case
-        translate([0, 0, h / 2])
-        cube([pi3_case_width + t * 2, pi3_case_depth + t * 2, h], center=true);
-
-        // The inner outcut of the case
-        translate([0, 0, h / 2 + t])
-        cube([pi3_case_width, pi3_case_depth, h], center=true);
-
-        // The cutout at the bottom
-        color("red")
-        translate([0, 0, 1])
-        cube([w - 16, d - 16, t + 2], center=true);
-
-        // The hole for the usb power connector
-        color("red")
-        translate([pi3_case_point0x + e / 2 + 5, pi3_case_point0y - 1, t + 4])
-        cube([15, t + 2, 7]);
-
-    }
-
-    // Screw bottom left
-    translate([pi3_case_point0x + t + 3.5 + e / 2, pi3_case_point0y + t + 3.5 + e / 2, t])
-    screw_mount();
-
-    // Screw bottom right
-    translate([pi3_case_point0x + t + 3.5 + 58 + e / 2, pi3_case_point0y + t + 3.5 + e / 2, t])
-    screw_mount();
-
-    // Screw top left
-    translate([pi3_case_point0x + t + 3.5 + e / 2, pi3_case_point0y + t + 3.5 + 49 + e / 2, t])
-    screw_mount();
-
-    // Screw top right
-    translate([pi3_case_point0x + t + 3.5 + 58 + e / 2, pi3_case_point0y + t + 3.5 + 49 + e / 2, t])
-    screw_mount();
-};
-
-module raspi3_cover(w, d, e, t) {
-    pi3_case_width=w + e;
-    pi3_case_depth=d + e;
-
-    echo(pi3_case_depth);
-
-    pi3_case_point0x = - pi3_case_width / 2 - t;
-    pi3_case_point0y = - pi3_case_depth / 2 - t;
-
-    difference() {
-        cube([pi3_case_width + t * 2, pi3_case_depth + t * 2, t], center=true);
-
-        color("red")
-        translate([pi3_case_point0x + 8, pi3_case_point0y + 7, - t])
-        cube([77, 50, t + 2], center=false);
-    }
-
-    difference() {
-        // The inner frame
-        color("pink")
-        translate([0, 0, - t])
-        cube([pi3_case_width - 0.1, pi3_case_depth - 0.1, 2], center=true);
-
-        // The inner frame outcut
-        color("red")
-        translate([0, 0, - t])
-        cube([pi3_case_width - 1.5, pi3_case_depth - 1.5, 3], center=true);
-    }
-};
-
 module funnel() {
 
     difference() {
@@ -107,32 +18,13 @@ module funnel() {
         translate([0, 0, - pi_funnel_height - pi_material_thickness])
         panel_insert_funnel(pi_material_thickness, pi_funnel_height, pi_funnel_hole_diameter, pi_funnel_bottom_diameter);
 
-        // Cut out the same size as the raspberry pi case
-        color("pink")
-        translate([0, 0, -20])
-        cube([91, 62, 31], center=true);
-
         // Cutout the tunnel for the usb power
         color("green")
-        translate([-39.5, -100, -25])
-        cube([12, 100, 7]);
-
+        translate([-5, -30, - pi_funnel_height / 2 + 5])
+        rotate([90,0,0])
+        cylinder(h=100, r1=6, r2=6);
     }
 
-    // Add the raspberry pi case
-    translate([0, 0, -32])
-    raspi3_case(pi_pi3_width, pi_pi3_depth, 6, 31, 2);
 };
 
-module cover() {
-    raspi3_cover(pi_pi3_width, pi_pi3_depth, 6, 2);
-
-};
-
-if (pi_draw=="funnel") {
-    funnel();
-};
-
-if (pi_draw=="cover") {
-    cover();
-};
+funnel();
