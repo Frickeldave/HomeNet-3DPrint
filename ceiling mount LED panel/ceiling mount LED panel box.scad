@@ -6,9 +6,9 @@ cm_depth = 60; // Inner size of the box; depth
 cm_height = 45; // Inner size of the box; height
 cm_thickness = 2; // Material thickness
 cm_coh_diameter = 28.1; // The diameter of the cable outlet hole
-cm_coh_length = 10; // This is how long the outlet hole looks out of the housing
+cm_coh_length = 0; // This is how long the outlet hole looks out of the housing
 cm_coh_ceiling_distance = 15; // The distance of the outlet hole to the ceiling
-cm_led_mount = 17; // The stick to which the LED panel is attached to.
+cm_led_mount = 16; // The stick to which the LED panel is attached to.
 
 
 // st = Stick thickness;
@@ -157,7 +157,7 @@ module panel_box(w, d, h, t, col, codis, cohdia) {
 
         // Mount hole for the LED mount part
         color("red")
-        translate([35, d / 2 + 2.5, -20])
+        translate([28.5, d / 2 + 2.0, -20])
         cylinder(h=40, r = 2.5);
     }
 
@@ -267,11 +267,11 @@ module panel_cover(w, d, h, t) {
 }
 
 // Draw the Panel mount
-translate([-4, cm_depth / 2 + cm_thickness, 15])
-%panel_mount(cm_led_mount, cm_depth, 77);
+//translate([-10, cm_depth / 2 + cm_thickness, 15])
+//panel_mount(cm_led_mount, cm_depth, 77);
 
 // Draw the box
-%panel_box(cm_width, cm_depth, cm_height, cm_thickness, cm_coh_length, cm_coh_ceiling_distance, cm_coh_diameter);
+panel_box(cm_width, cm_depth, cm_height, cm_thickness, cm_coh_length, cm_coh_ceiling_distance, cm_coh_diameter);
 
 // // Draw the cover
 // translate([0, 0, cm_height + cm_thickness * 2])
