@@ -7,8 +7,7 @@ dah_hole_count = 10;
 
 use <./../modules/hex_grid_v02.scad>
 
-module dremel_block(w, d, h, hc)
-{
+module dremel_block(w, d, h, hc) {
     difference() {
         union() {
             cube([w, d, h]);
@@ -37,8 +36,7 @@ module dremel_block(w, d, h, hc)
     }
 }
 
-module dremel_tool_insert(td)
-{
+module dremel_tool_insert(td) {
     difference() {
         union() {
             cylinder(h = 11, r=3.8);
@@ -55,21 +53,40 @@ module dremel_tool_insert(td)
 module dremel_block_holder(w, d, h)
 {
     difference() {
-        union() {
-            cube([w + 4, d + 4, h + 4]);
-        }
+        cube([w + 4, d + 2, h + 4]);
+        
+        color("red")
+        translate([2, -1, 2])
+        cube([w, d + 1, h]);
 
         color("red")
-        translate([2, -2, 2])
-        cube([w, d, h]);
-
-        color("green")
-        translate([8, - 8, -1])
+        translate([8, - 4, -1])
         cube([w - 12, d, h + 6]);
         
+        color("pink")
+        translate([20, d + 3, (h + 4) / 2])
+        rotate([90, 0, 0])
+        cylinder(h = 4, r = 2);
+
+        color("pink")
+        translate([(w + 2) - 20, d + 3, (h + 4) / 2])
+        rotate([90, 0, 0])
+        cylinder(h = 4, r = 2);        
     }
+
+    hexgrid_frame(w, d, 2);
+
+    translate([2, 0, 0])
+    cube([w, 2, 2]);
 }
 
-//dremel_tool_insert(2);
+
+// color("violet")
+// translate([15.7, 38.5, 4])
+dremel_tool_insert(2);
+
+// translate([2.1, 0, 2.1])
 //dremel_block(dah_width, dah_depth, dah_height, dah_hole_count);
-dremel_block_holder(dah_width, dah_depth, dah_height);
+
+//translate([0, dah_depth - 32, 0])
+//dremel_block_holder(dah_width + 0.2, dah_depth - 20, dah_height + 0.2);

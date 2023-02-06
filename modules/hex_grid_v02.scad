@@ -22,6 +22,36 @@ module hexgrid(box, holediameter, wallthickness) {
         
 }
 
+module hexgrid_frame(w, d, t) {
+    difference() {
+        union() {    
+            difference() {
+
+                cube([w, d, t]);
+
+                translate([t, t, -1])
+                cube([w - t * 2, d - t * 2, t + 2]);
+            }
+
+            hexgrid([w, d, 2], 10, 2);
+        }
+
+        translate([0, -10, -1])
+        cube([w, 10, t + 2]);
+
+        translate([-10, -10, -1])
+        cube([10, d + 20, t + 2]);
+
+        translate([w, -10, -1])
+        cube([10, d + 20, t + 2]);
+
+        translate([0, d, -1])
+        cube([w, 10, t + 2]);
+
+
+    }
+}
+
 // first arg is vector that defines the bounding box, length, width, height
 // second arg in the 'diameter' of the holes. In OpenScad, this refers to the corner-to-corner diameter, not flat-to-flat
 // this diameter is 2/sqrt(3) times larger than flat to flat
