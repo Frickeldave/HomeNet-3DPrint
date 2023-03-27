@@ -1,7 +1,7 @@
 
 // The measure of the box
-wb_width=65;            // Original: 65
-wb_depth=50;            // Original: 50
+wb_width=64.5;            // Original: 65
+wb_depth=49.5;            // Original: 50
 wb_height=80;           // Original: 80
 wb_thickness=1.5;       // Original: 1.5
 

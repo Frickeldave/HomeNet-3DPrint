@@ -39,14 +39,14 @@ module dremel_block(w, d, h, hc) {
 module dremel_tool_insert(td) {
     difference() {
         union() {
-            cylinder(h = 11, r=3.8);
+            cylinder(h = 10, r=3.8);
 
-            translate([0, 0, 11])
+            translate([0, 0, 10])
             cylinder(h = 1, r = 5);
         }
 
         translate([0, 0, 2])
-        cylinder(h = 11, r = td / 2);
+        cylinder(h = 10, r = td / 2);
     }
 }
 
@@ -80,13 +80,34 @@ module dremel_block_holder(w, d, h)
     cube([w, 2, 2]);
 }
 
+module dremel_drawer(w, d, h){
+
+    difference() {
+        union() {
+            cube([w, d, h]);
+
+            translate([w / 2 - 20, -8 , h / 2])
+            cube([40, 8, 5]);
+        }
+
+        translate([2, 2, 2])
+        cube([ w - 4, d - 4, h]);
+    }
+}
 
 // color("violet")
 // translate([15.7, 38.5, 4])
-dremel_tool_insert(2);
+// dremel_tool_insert(2);
+// dremel_tool_insert(2.5);
+// dremel_tool_insert(3);
+// dremel_tool_insert(3.5);
+// dremel_tool_insert(4);
 
 // translate([2.1, 0, 2.1])
-//dremel_block(dah_width, dah_depth, dah_height, dah_hole_count);
+// dremel_block(dah_width, dah_depth, dah_height, dah_hole_count);
+
+//translate([2.1, 0, 2.1])
+dremel_drawer(dah_width, dah_depth, dah_height);
 
 //translate([0, dah_depth - 32, 0])
-//dremel_block_holder(dah_width + 0.2, dah_depth - 20, dah_height + 0.2);
+//dremel_block_holder(dah_width + 0.6, dah_depth - 20, dah_height + 0.4);

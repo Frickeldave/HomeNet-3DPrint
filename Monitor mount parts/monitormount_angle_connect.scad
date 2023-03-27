@@ -3,73 +3,53 @@ mm_pipe_diameter=21.5; // Use the real measure of your pipe here. One size will 
 mm_thickness=4; // Take the same value as in the "half_shell" file. 
 mm_holder_depth=12; // Take the same value as in the "half_shell" file. 
 mm_width_straight=100; // Take the same value as in the "half_shell" file.
-mm_angle=20; // The angle with which the two parts are joined together.
+mm_angle=-50; // The angle with which the two parts are joined together.
 mm_width_angled=100; // The high of the vertical holder.
 mm_screw_count=5; // The number of screws on each side.
+mm_screw_diameter=5; // The diameter of the screws you want to use
 
 use <./monitormount_half_shell.scad>
 
-module mm_connector(h, d, a) {
+
+module mm_shelf_with_connector() {
     
     difference() {
         union() {
-            difference() {
-                cylinder(h = h/2, r = d / 2);
-                
-                color("red")
-                translate([0, - d / 2 - 1, -1])
-                cube([d / 2 + 1, d + 2, h / 2 + 1]);
-            }
+            // Draw the half she
+            mm_holder(mm_width_straight, mm_screw_count);
+        
+        translate([0, 25, mm_width_straight / 2])
+        rotate([90, 0, 0])
+        cylinder(h = 50, r = 16);
 
-            difference() {
-                color("lightgreen")
-                translate([0, 0, h / 2])
-                cylinder(h = h / 2, r = d / 2);
+        }
 
+        // Substract the pipe
+        translate([0, 0, -1])
+        cylinder(h=mm_width_straight + 2, r=mm_pipe_diameter / 2);
 
-            }
-        }        
+        // Substract the flat side of the shell
+        translate([-19.5, -30, 0])
+        cube([20, 60, mm_width_straight]);
+
+        // Substract the left screwhole
+        translate([-10, -19, mm_width_straight / 2])
+        rotate([90,00,90])
+        cylinder(h=40, r=mm_screw_diameter/2);
+
+        // Substract the right screwhole
+        translate([-10, +19, mm_width_straight / 2])
+        rotate([90,00,90])
+        cylinder(h=40, r=mm_screw_diameter/2);
+
     }
 
-    color("red")
-    translate([0, - d - 2, h / 2])
-    rotate([0, 0, a])
-    translate([0, - d / 2 - 1, h / 2])
-    cube([d / 1 + 1, d + 2, h / 2 + 2]);
 }
 
-mm_connector(100, 20, 20);
+mm_shelf_with_connector();
 
-// difference() {
-//     union() {
-//         // straight element
-//         translate([0, 0, 0])
-//         mm_holder(mm_width_straight, mm_screw_count);
-
-//         // element with angle
-//         translate([0, 0, mm_width_straight / 2])
-//         rotate([0,mm_angle,0])
-//         translate([0, mm_pipe_diameter + mm_thickness + mm_holder_depth * 2, -mm_width_straight / 2])
-//         mm_holder(mm_width_angled, mm_screw_count);
-
-
-//         //create the "connection cube" at the straight element
-//         mm_cyl_size = mm_pipe_diameter * 2 + mm_holder_depth * 2 + mm_thickness * 3;
-//         color("pink")
-//         translate([1, mm_cyl_size - mm_pipe_diameter / 2 - mm_thickness,  mm_width_straight / 2])
-//         rotate([90,180,0])
-//         mm_connector(mm_cyl_size, mm_pipe_diameter * 2);
-//     }
-
-//     //Remove the pipes again 
-//     color("red")
-//     translate([0, 0, -1])
-//     cylinder(h=mm_width_straight + 2, r=mm_pipe_diameter/2);
-
-//     color("red")
-//     translate([0, 0, mm_width_straight / 2])
-//     rotate([0,mm_angle,0])
-//     translate([0, mm_pipe_diameter + mm_thickness + mm_holder_depth * 2, -mm_width_straight / 2 -1])
-//     cylinder(h=mm_width_straight + 2, r=mm_pipe_diameter/2);
-// }
-
+// Draw the angeled shelf
+translate([0, 0, mm_width_straight / 2])
+rotate([0,mm_angle,0])
+translate([0, mm_pipe_diameter + mm_thickness + mm_holder_depth * 2, -mm_width_straight / 2])
+mm_shelf_with_connector();
