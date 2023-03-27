@@ -95,4 +95,3 @@ module mm_holder(w, shc) {
     }
 }
 
-mm_holder(80,5);

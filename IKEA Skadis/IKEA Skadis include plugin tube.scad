@@ -10,7 +10,7 @@ module plugin_tube(tube_height, tube_width,tube_material_size,tube_distance, rei
     // middle reinforcement
     if(tube_distance > 2 && reinforcements == 1) {
         color("green")
-        translate([0,tube_width/2,0])
+        translate([ - tube_material_size /2,tube_width/2,0])
         cube([tube_material_size, tube_distance, tube_height]);
     }
 
@@ -41,4 +41,4 @@ module plugin_tube(tube_height, tube_width,tube_material_size,tube_distance, rei
     }
 }
 
-//plugin_tube(10, 30, 2, 2, 1);
+plugin_tube(10, 30, 2, 5, 1);
