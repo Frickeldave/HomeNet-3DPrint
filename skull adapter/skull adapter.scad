@@ -1,6 +1,9 @@
 $fn = 100;
 
 material_thickness=3;
+border_height=5;
+plate_height=3;
+corner_radius=9.5;
 
 module half_skull_outer() {
     polygon(points=[
@@ -51,25 +54,25 @@ module half_skull_inner() {
 module plate() {
     difference() {
         union() {
-            linear_extrude(height=5)
+            linear_extrude(height = border_height + plate_height)
             color("grey")
             translate([0, 0, 0])
             half_skull_outer(); 
 
-            linear_extrude(height=5)
+            linear_extrude(height = border_height + plate_height)
             color("grey")
             translate([-0.1, 0, 0])
             mirror([1,0,0])
             half_skull_outer();
         }
         
-        translate([0, 0, 3])
+        translate([0, 0, 1])
         union() {
-            linear_extrude(height=5)
+            linear_extrude(height = border_height + plate_height)
             color("red")
             half_skull_inner();
 
-            linear_extrude(height=5)
+            linear_extrude(height = border_height + plate_height)
             color("red")
             translate([-0.1, 0, 0])
             mirror([1, 0, 0]) 
@@ -80,15 +83,37 @@ module plate() {
     color("grey")
     translate([-30, 2, 0])
     minkowski() {
-        cube([60,90,1]);
+        cube([60,90, plate_height]);
         color("red")
-        cylinder(r=9.5,h=1,center=true);
+        cylinder(r =corner_radius, h = 1, center = true);
     };
 }
 
 difference() {
-    plate();
     
+    union() {
+    
+        plate();
+
+        translate([-15, 20, plate_height])
+        cylinder(h=3, r = 2.5);
+        translate([15, 20, plate_height])
+        cylinder(h=3, r = 2.5);
+        translate([-15, 75, plate_height])
+        cylinder(h=3, r = 2.5);
+        translate([15, 75, plate_height])
+        cylinder(h=3, r = 2.5);
+    }
+    
+    // hole bottom
+    translate([0, 15, -1])
+    cylinder(h = 10, r = 2.5);
+
+    // hole middle
+    translate([0, 47.5, -1])
+    cylinder(h = 10, r = 2.5);
+
+    // hole bottom
+    translate([0, 80, -1])
     cylinder(h = 10, r = 2.5);
 }
-
