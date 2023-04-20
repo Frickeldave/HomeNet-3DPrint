@@ -1,6 +1,6 @@
 $fn = 200;
 
-cn_dia = 45;
+cn_dia = 30;
 cn_height = 5;
 
 module torus(r1, r2) {

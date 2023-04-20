@@ -3,7 +3,12 @@ $fn = 100;
 material_thickness=3;
 border_height=5;
 plate_height=3;
-corner_radius=9.5;
+corner_radius=6.35; // radius (not diameter) of the router
+
+width = 80;
+height = 110;
+width_minkowski = width - 2 * corner_radius;
+height_minkowski = height  - 2 * corner_radius;
 
 module half_skull_outer() {
     polygon(points=[
@@ -81,9 +86,9 @@ module plate() {
     }
 
     color("grey")
-    translate([-30, 2, 0])
+    translate([-width_minkowski / 2, 0, 0])
     minkowski() {
-        cube([60,90, plate_height]);
+        cube([width_minkowski, height_minkowski, plate_height]);
         color("red")
         cylinder(r =corner_radius, h = 1, center = true);
     };
