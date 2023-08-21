@@ -2,7 +2,7 @@ $fn = 100;
 
 thickness=4;
 width=135;
-height=85;
+height=77;
 depth=20;
 
 module reinforcement() {
@@ -45,10 +45,10 @@ module wall() {
             reinforcement();
         }
 
-        color("red")
-        translate([width/2, thickness+1, height/2+thickness])
-        rotate([90,0,0])
-        cylinder(h=thickness+2, r=height/2-5);
+        // color("red")
+        // translate([width/2, thickness+1, height/2+thickness])
+        // rotate([90,0,0])
+        // cylinder(h=thickness+2, r=height/2-5);
     }
 }
 
@@ -89,13 +89,13 @@ module wall_tunnel_right() {
 }
 
 
-wall_tunnel_left();
+//wall_tunnel_left();
 
-translate([width + 10, 0, 0])
-wall_tunnel_right();
+// translate([width + 10, 0, 0])
+//wall_tunnel_right();
 
-translate([width * 2 + 20, 0, 0])
+// translate([width * 2 + 20, 0, 0])
 wall();
 
-translate([width * 3 + 30, 0, 0])
-wall();
+// translate([width * 3 + 30, 0, 0])
+// wall();
