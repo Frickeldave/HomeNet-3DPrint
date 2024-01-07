@@ -2,10 +2,17 @@ $fn = 100;
 
 use <./Blast gate components.scad>
 
-//blast_gate_holder(80, 30);
+// Body with pipe_diameter of 50, pipe thickness of 4, a base plate thickness of 4 and an excerpt of 4 mm
+translate([0,0,10])
+blast_gate_body_with_excerpt_v2(50, 4, 4, 4, 1);
 
-// blast_gate_slider(59.8, 175, 4.6, 2, 10);
+// slider
+translate([-22, 0, 0])
+color("lightblue")
+blast_gate_slider_v2(50, 175, 4, 1);
 
-// blast_gate_body(24.9, 45);
+//Body with pipe_diameter of 50, pipe thickness of 4 and base plate thickness of 4
+translate([0,0,-10])
+rotate([180, 0, 0])
+blast_gate_body_v2(50, 4, 4);
 
-blast_gate_body_v2(50, 2);
