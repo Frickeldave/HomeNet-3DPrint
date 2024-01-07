@@ -1,7 +1,7 @@
 $fn=100;
 
 
-ml_clip_width=50; // Default: 50. The width of the clip
+ml_clip_width=100; // Default: 50. The width of the clip
 ml_clip_depth=30.2; // This is the width of the lamp. I used an U-profile with a size of 30mm. Recommendation to add 0.2 to fit perfectly. 
 ml_clip_heigth=20.6; // The height of the lamp. This is the height of the U-Profile and the thickness of the diffusor. the Diffusor has a thickenss of 0.4 and i recommnd to add another 0.2mm to fit perfectly (20.6 for 20 mm profile).
 ml_clip_thickness=1.0; // The material thickness of the clip (One mm will be added automatically)

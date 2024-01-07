@@ -1,7 +1,7 @@
 // $fn = 100;
 
-dvd_drive_width = 143;
-dvd_drive_height = 12;
+dvd_drive_width = 144;
+dvd_drive_height = 20;
 thickness = 4;
 border = 8;
 
