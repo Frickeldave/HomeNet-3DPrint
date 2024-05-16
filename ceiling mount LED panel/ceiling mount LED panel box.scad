@@ -4,9 +4,9 @@ $fn = 50;
 cm_width = 190; // Inner size of the box; width
 cm_depth = 60; // Inner size of the box; depth
 cm_height = 45; // Inner size of the box; height
-cm_thickness = 2; // Material thickness
+cm_thickness = 4; // Material thickness
 cm_coh_diameter = 28.1; // The diameter of the cable outlet hole
-cm_coh_length = 0; // This is how long the outlet hole looks out of the housing
+cm_coh_length = 10; // This is how long the outlet hole looks out of the housing
 cm_coh_ceiling_distance = 15; // The distance of the outlet hole to the ceiling
 cm_led_mount = 16; // The stick to which the LED panel is attached to.
 
@@ -85,17 +85,23 @@ module panel_box(w, d, h, t, col, codis, cohdia) {
             // The box
             cube([w + t * 2, d + t * 2, h + t * 2]);
 
-            // The outer ring of cable outlot hole ()
+            // The outer ring of cable outlet hole
             translate([-col, d / 2 + t, h - cohdia / 2 - codis + t])
             rotate([0,  90, 0])
-            cylinder(h=col + t, r=cohdia / 2 + t * 2);
+            cylinder(h=col, r=cohdia / 2 + t * 2);
+
         }
+
+        //Cut off the bottom edge of the outer ring so that we form a straight edge with the housing
+        color("green")
+        translate([-col - 1, 0, - t - 1])
+        cube([col + 2 + 1, d + t * 2, t + 1]);
         
         // The inner range of the box
         translate([t, t, t])
         cube([w, d, h + t + 1]);
 
-        // The cable outlet hole
+        //The cable outlet hole at the rear end
         translate([-col - 1, d / 2 + t,  h - cohdia / 2 - codis + t])
         rotate([0, 90, 0])
         cylinder(h = col + t + 2, r = cohdia / 2);
@@ -150,7 +156,7 @@ module panel_box(w, d, h, t, col, codis, cohdia) {
                 box_cooling(w / 5 - 12, t + 2, 3);
 
                 color("red")
-                translate([i + 8, d + 1, h - 15])
+                translate([i + 8, d + t -1, h - 15])
                 box_cooling(w / 5 - 12, t + 2, 3);
             }
         }
@@ -178,35 +184,41 @@ module panel_cover(w, d, h, t) {
             union() {
                 
                 // The upper part of the clip (front)
+                color("green")
                 translate([0, 0, 0])
                 cube([10, 4, 10]);
 
                 // The lower round part of the clip (front)
+                color("green")
                 translate([5, 4, 0])
                 rotate([90, 0, 0])
                 cylinder(h = 4, r = 5);
 
                 // The reinforcement
-                color("cyan")
+                color("green")
                 translate([0, 4, 8])
                 cube([10, d - 8, 2]);
 
                 // The upper part of the clip (back)
+                color("green")
                 translate([0, d - 4, 0])
                 cube([10, 4, 10]);
 
                 // The lower round part of the clip (back)
+                color("green")
                 translate([5, d, 0])
                 rotate([90, 0, 0])
                 cylinder(h = 4, r = 5);
             }
 
             // The hole for the melting nut (front)
+            color("red")
             translate([5, 5, 1])
             rotate([90, 0, 0])
             cylinder(h = 4 + 2, r = 2.5);
 
             // The hole for the melting nut (back)
+            color("red")
             translate([5, d + 1, 1])
             rotate([90, 0, 0])
             cylinder(h = 4 + 2, r = 2.5);
@@ -222,11 +234,12 @@ module panel_cover(w, d, h, t) {
             // The inner frame
             difference() {
 
-                translate([t + 0.2, t + 0.2, - t])
+                color("cyan")
+                translate([t + 0.2, t + 0.2, - t + 2])
                 cube([w - t * 2 - 0.4, d - t * 2 - 0.4, 2]);
 
-                translate([t * 2 + 0.2, t * 2 + 0.2, - t - 1])
-                cube([w - t * 4 - 0.4, d - t * 4 - 0.4, 3]);
+                translate([t * 2 + 0.2, t * 2 + 0.2, - t +1])
+                cube([w - t * 4 - 0.4, d - t * 4 - 0.4, 4]);
             }
 
             // clip left
@@ -243,27 +256,28 @@ module panel_cover(w, d, h, t) {
 
             // Mount left
             color("cyan")
-            translate([20, d / 2, -t])
+            translate([20, d / 2, -t +2])
             cylinder(h = 2, r = 5);
 
             // Mount right
             color("cyan")
-            translate([w - 20, d / 2, -t])
+            translate([w - 20, d / 2, -t + 2])
             cylinder(h = 2, r = 5);
         }
 
         // Mount left hole
         color("red")
-        translate([20, d / 2, -t - 1])
-        cylinder(h = 6, r = 2);
+        translate([20, d / 2, -t +1])
+        cylinder(h = t + 2 + 2, r = 2);
 
         // Mount right hole
         color("red")
-        translate([w - 20, d / 2, -t - 1])
-        cylinder(h = 6, r = 2);
+        translate([w - 20, d / 2, -t + 1])
+        cylinder(h = t + 2 + 2, r = 2);
+
+
 
     }
-
 }
 
 // Draw the Panel mount
@@ -271,8 +285,8 @@ module panel_cover(w, d, h, t) {
 //panel_mount(cm_led_mount, cm_depth, 77);
 
 // Draw the box
-panel_box(cm_width, cm_depth, cm_height, cm_thickness, cm_coh_length, cm_coh_ceiling_distance, cm_coh_diameter);
+//panel_box(cm_width, cm_depth, cm_height, cm_thickness, cm_coh_length, cm_coh_ceiling_distance, cm_coh_diameter);
 
-// // Draw the cover
-// translate([0, 0, cm_height + cm_thickness * 2])
-// panel_cover(cm_width + cm_thickness * 2, cm_depth + cm_thickness * 2, cm_height, cm_thickness); 
+// Draw the cover
+//translate([0, 0, cm_height + cm_thickness * 2])
+panel_cover(cm_width + cm_thickness * 2, cm_depth + cm_thickness * 2, cm_height, cm_thickness); 

@@ -10,11 +10,11 @@ pi_funnel_bottom_diameter = 100;
 pi_pi3_width=85;
 pi_pi3_depth=56;
 
-pi_draw="funnel"; // "funnel" or "cover"
+pi_draw="cover"; // "funnel" or "cover"
 
 module screw_mount() {
     difference() {
-        cylinder(h=4, r=1.5);
+        cylinder(h=4, r=2.5);
         cylinder(h=5, r=0.5);
     }
 };
@@ -48,9 +48,10 @@ module raspi3_case(w, d, e, h, t) {
         // The hole for the usb power connector
         color("red")
         translate([pi3_case_point0x + e / 2 + 5, pi3_case_point0y - 1, t + 2])
-        cube([15, t + 2, 9]);
+        cube([20, t + 2, 13]);
 
     }
+
 
     // Screw bottom left
     translate([pi3_case_point0x + t + 3.5 + e / 2, pi3_case_point0y + t + 3.5 + e / 2, t])
@@ -82,22 +83,28 @@ module raspi3_cover(w, d, e, t) {
         cube([pi3_case_width + t * 2, pi3_case_depth + t * 2, t], center=true);
 
         color("red")
-        translate([pi3_case_point0x + 8, pi3_case_point0y + 7, - t])
+        translate([pi3_case_point0x + 10, pi3_case_point0y + 7, - t])
         cube([77, 50, t + 2], center=false);
     }
 
     difference() {
         // The inner frame
         color("pink")
-        translate([0, 0, - t])
-        cube([pi3_case_width - 0.1, pi3_case_depth - 0.1, 2], center=true);
+        translate([0, 0, - t - 3])
+        cube([pi3_case_width - 0.5, pi3_case_depth - 0.5,8], center=true);
 
         // The inner frame outcut
         color("red")
-        translate([0, 0, - t])
-        cube([pi3_case_width - 1.5, pi3_case_depth - 1.5, 3], center=true);
+        translate([0, 0, - t - 3])
+        cube([pi3_case_width - 1.8, pi3_case_depth - 1.5, 16], center=true);
+        
+        // The outcut for USB
+        color("green")
+        translate([pi3_case_width / 2 - 9, 0, 0-t-8-5])
+        cube([20, pi3_case_depth + 2, 16], center=true);
     }
 };
+
 
 module funnel() {
 
@@ -115,7 +122,7 @@ module funnel() {
         // Cutout the tunnel for the usb power
         color("green")
         translate([-39.5, -100, -27])
-        cube([14, 100, 9]);
+        cube([20, 100, 13]);
 
     }
 
@@ -125,14 +132,18 @@ module funnel() {
 };
 
 module cover() {
-    raspi3_cover(pi_pi3_width, pi_pi3_depth, 6, 2);
+    raspi3_cover(pi_pi3_width, pi_pi3_depth, 6, pi_material_thickness);
 
 };
 
-if (pi_draw=="funnel") {
-    funnel();
-};
+// if (pi_draw=="funnel") {
+//     funnel();
+// };
 
-if (pi_draw=="cover") {
-    cover();
-};
+// if (pi_draw=="cover") {
+//     cover();
+// };
+
+// funnel();
+// translate([0,0,5])
+cover();
