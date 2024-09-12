@@ -13,7 +13,7 @@ difference() {
 color("cyan")
 translate([0, 0, 4])
 difference() {
-    cylinder(h = 2, r1 = id / 2 + 6, r2 = id / 2 + 2);
+    cylinder(h = 2, r1 = id / 2 + 6, r2 = id / 2 + 4);
     translate([0, 0, -1])
     cylinder(h = 4, r = id / 2 - 2);
 }
