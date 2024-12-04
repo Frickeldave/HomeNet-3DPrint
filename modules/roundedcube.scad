@@ -1,5 +1,28 @@
-// Higher definition curves
-$fs = 0.01;
+// More information: https://danielupshaw.com/openscad-rounded-corners/
+
+
+// Examples
+// color("Yellow")
+// roundedcube(3, true, 0.7, "xmin");
+
+// translate(v = [1, 0, 2])
+// color("Pink")
+// roundedcube([4, 2, 2], false, 0.6, "zmax");
+
+// translate(v = [-4, -1, 2])
+// color("Lightblue")
+// roundedcube(2, false);
+
+// translate(v = [0, 0, 6])
+// color("Orange")
+// roundedcube([3, 2, 2], true, 0.2);
+
+// translate(v = [2.5, -0.5, 5])
+// color("Green")
+// roundedcube([3, 2, 2], false, 0.4, "z");
+
+// Set to 0.01 for higher definition curves (renders slower)
+$fs = 0.15;
 
 module roundedcube(size = [1, 1, 1], center = false, radius = 0.5, apply_to = "all") {
 	// If single value, convert to [x, y, z] vector
@@ -11,15 +34,6 @@ module roundedcube(size = [1, 1, 1], center = false, radius = 0.5, apply_to = "a
 	translate_zmax = size[2] - radius;
 
 	diameter = radius * 2;
-
-	module build_point(type = "sphere", rotate = [0, 0, 0]) {
-		if (type == "sphere") {
-			sphere(r = radius);
-		} else if (type == "cylinder") {
-			rotate(a = rotate)
-			cylinder(h = diameter, r = radius, center = true);
-		}
-	}
 
 	obj_translate = (center == false) ?
 		[0, 0, 0] : [
@@ -44,14 +58,15 @@ module roundedcube(size = [1, 1, 1], center = false, radius = 0.5, apply_to = "a
 							(apply_to == "ymin" && y_at == "min") || (apply_to == "ymax" && y_at == "max") ||
 							(apply_to == "zmin" && z_at == "min") || (apply_to == "zmax" && z_at == "max")
 						) {
-							build_point("sphere");
+							sphere(r = radius);
 						} else {
 							rotate = 
 								(apply_to == "xmin" || apply_to == "xmax" || apply_to == "x") ? [0, 90, 0] : (
 								(apply_to == "ymin" || apply_to == "ymax" || apply_to == "y") ? [90, 90, 0] :
 								[0, 0, 0]
 							);
-							build_point("cylinder", rotate);
+							rotate(a = rotate)
+							cylinder(h = diameter, r = radius, center = true);
 						}
 					}
 				}
