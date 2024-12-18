@@ -1,7 +1,7 @@
 skadis_hook_width = 4.5;
 skadis_hook_height = 46;
 skadis_hole_spacing_width = 40; // middle to middle
-cutout_tolerance_w = 0.2;
+cutout_tolerance_w = 0.4;
 cutout_tolerance_h = 0.6;
 
 
